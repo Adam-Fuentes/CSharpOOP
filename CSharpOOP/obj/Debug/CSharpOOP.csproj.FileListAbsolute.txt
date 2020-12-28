@@ -1,0 +1,6 @@
+D:\Software Developer\Cursos\C#\OOP\Proyectos\Section 1\CSharpOOP\CSharpOOP\bin\Debug\CSharpOOP.exe.config
+D:\Software Developer\Cursos\C#\OOP\Proyectos\Section 1\CSharpOOP\CSharpOOP\bin\Debug\CSharpOOP.exe
+D:\Software Developer\Cursos\C#\OOP\Proyectos\Section 1\CSharpOOP\CSharpOOP\bin\Debug\CSharpOOP.pdb
+D:\Software Developer\Cursos\C#\OOP\Proyectos\Section 1\CSharpOOP\CSharpOOP\obj\Debug\CSharpOOP.csprojAssemblyReference.cache
+D:\Software Developer\Cursos\C#\OOP\Proyectos\Section 1\CSharpOOP\CSharpOOP\obj\Debug\CSharpOOP.exe
+D:\Software Developer\Cursos\C#\OOP\Proyectos\Section 1\CSharpOOP\CSharpOOP\obj\Debug\CSharpOOP.pdb
