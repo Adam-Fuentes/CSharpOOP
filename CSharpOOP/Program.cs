@@ -14,8 +14,15 @@ namespace CSharpOOP
 
             Warrior theBadGuy = new Warrior(170, 90, "Bad guy");
 
-            theGoodGuy.Greetings(theBadGuy);
-            theBadGuy.Greetings(theGoodGuy);
+            try
+            {
+                theGoodGuy.Age = 26;
+                theBadGuy.Age = 15;
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
