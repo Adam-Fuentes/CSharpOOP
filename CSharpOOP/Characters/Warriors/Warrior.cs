@@ -1,38 +1,58 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Weapons;
 
-namespace CSharpOOP
+namespace Characters.Warriors
 {
-    class Warrior
+    public class Warrior
     {
         private int height;
         private int weight;
         private int age;
         private string name;
+        private Sword swordWeapon;
 
-        public int Height { get; set; }
-        public int Weight { get; set; }
-        public int Age {
+        public int Height
+        {
+            get
+            {
+                return height;
+            }
+            set
+            {
+                height = value;
+            }
+        }
+        public int Weight
+        {
+            get
+            {
+                return weight;
+            }
+            set
+            {
+                weight = value;
+            }
+        }
+        public int Age
+        {
             get
             {
                 return age;
             }
             set
             {
-                if (value >= 14 && value <= 45)
+                if (value >= 18 && value <= 45)
                 {
                     age = value;
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException(string.Empty, $@"The select age for {name}, is not a proper age for a Warrior. The age mut be between 18 and 45.");                  
+                    throw new ArgumentOutOfRangeException(string.Empty, $@"The selected age for {Name}, is not a proper age for a Warrior. Please use age between 18 and 45.");
                 }
             }
         }
-        public string Name {
+        public string Name
+        {
             get
             {
                 return name;
@@ -40,19 +60,42 @@ namespace CSharpOOP
             set
             {
                 name = value;
-            } 
+            }
+        }
+        public Sword SwordWeapon
+        {
+            get
+            {
+                return this.swordWeapon;
+            }
+            set
+            {
+                this.swordWeapon = value;
+            }
+        }
+
+        public Warrior()
+            : this(170, 70)
+        {
+        }
+
+        public Warrior(int height, int weight)
+            : this(height, weight, "Young Warrior")
+        {
         }
 
         public Warrior(int height, int weight, string name)
         {
-            Height = height;
-            Weight = weight;
-            Name = name;
+            this.Height = height;
+            this.Weight = weight;
+            this.Name = name;
+            this.Age = 18;
+            this.SwordWeapon = new Sword();
         }
 
         public void Greetings(Warrior warrior)
         {
-            Console.WriteLine($@"Greetings, {warrior.Name}!");
+            Console.WriteLine($"Greetings {warrior.Name}!");
         }
     }
 }
