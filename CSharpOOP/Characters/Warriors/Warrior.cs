@@ -4,7 +4,7 @@ using Weapons;
 
 namespace Characters.Warriors
 {
-    public class Warrior
+    public class Warrior : Character
     {
         private const int DEFAULT_HEIGHT = 170;
         private const int DEFAULT_WEIGHT = 70;
@@ -29,10 +29,6 @@ namespace Characters.Warriors
         }
         
         private int height;
-        private int weight;
-        private int age;
-        private int healthPoints;
-        private string name;
         private Sword swordWeapon;
         private Faction faction;
 
@@ -52,57 +48,6 @@ namespace Characters.Warriors
             set
             {
                 height = value;
-            }
-        }
-        public int Weight
-        {
-            get
-            {
-                return weight;
-            }
-            set
-            {
-                weight = value;
-            }
-        }
-        public int Age
-        {
-            get
-            {
-                return age;
-            }
-            set
-            {
-                if (value >= 18 && value <= 45)
-                {
-                    age = value;
-                }
-                else
-                {
-                    throw new ArgumentOutOfRangeException(string.Empty, $@"The selected age for {Name}, is not a proper age for a Warrior. Please use age between 18 and 45.");
-                }
-            }
-        }
-        public int HealthPoints
-        {
-            get
-            {
-                return this.healthPoints;
-            }
-            private set
-            {
-                this.healthPoints = value;
-            }
-        }
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-            set
-            {
-                name = value;
             }
         }
         public Sword SwordWeapon
@@ -145,25 +90,31 @@ namespace Characters.Warriors
 
             this.id = IdCounter;
             this.Height = height;
-            this.Weight = weight;
+            base.Weight = weight;
             this.Name = name;
-            this.Age = 18;
+            base.Age = 18;
             this.SwordWeapon = new Sword();
             this.Faction = faction;
 
             if (this.faction == Faction.GoodGuy)
             {
-                this.HealthPoints = 120;
+                base.HealthPoints = 120;
             }
             else if (this.faction == Faction.BadGuy)
             {
-                this.HealthPoints = 100;
+                base.HealthPoints = 100;
             }
         }
 
-        public void Greetings(Warrior warrior)
+        public Warrior(int healthPoints, int weight, int age)
+            : base(healthPoints, weight, age)
         {
-            Console.WriteLine($"Greetings {warrior.Name}!");
+
+        }
+
+        public void SpecialWarriorGreeting()
+        {
+            base.Greetings(base.Name);
         }
 
         public static void GetDefaultValues(Warrior warrior)
@@ -173,6 +124,12 @@ namespace Characters.Warriors
                 $"\nDefault Name: {DEFAULT_NAME}" +
                 $"\nDefault Age: {DEFAULT_AGE}" +
                 $"\nDefault Weapon Damage: {warrior.DEFAULT_SWORD_WEAPON.Damage}");
+        }
+
+        public override void Move(int pauseBetweenMovements)
+        {
+            base.Move(pauseBetweenMovements);
+            Console.WriteLine("I just moved 10 times, I am a Warrior");
         }
     }
 }
