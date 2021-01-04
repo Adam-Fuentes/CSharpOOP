@@ -1,18 +1,20 @@
-﻿using Enumerations;
+﻿using Characters;
+using Enumerations;
+using Interfaces;
 using System;
 using Weapons;
 
 namespace Characters.Warriors
 {
-    public class Warrior : Character
+    public class Warrior : Melee, ICalculator
     {
         private const int DEFAULT_HEIGHT = 170;
         private const int DEFAULT_WEIGHT = 70;
         private const int DEFAULT_AGE = 18;
         private const string DEFAULT_NAME = "Young Warrior";
 
-        private readonly int id;
         private readonly Sword DEFAULT_SWORD_WEAPON = new Sword();
+        private readonly int id;
 
         private static int idCounter;
 
@@ -22,15 +24,15 @@ namespace Characters.Warriors
             {
                 return idCounter;
             }
-            set
+            private set
             {
                 idCounter = value;
             }
         }
         
         private int height;
-        private Sword swordWeapon;
         private Faction faction;
+        private Sword swordWeapon;
 
         public int ID
         {
@@ -43,11 +45,22 @@ namespace Characters.Warriors
         {
             get
             {
-                return height;
+                return this.height;
             }
             set
             {
-                height = value;
+                this.height = value;
+            }
+        }
+        public Faction Faction
+        {
+            get
+            {
+                return this.faction;
+            }
+            private set
+            {
+                this.faction = value;
             }
         }
         public Sword SwordWeapon
@@ -61,26 +74,14 @@ namespace Characters.Warriors
                 this.swordWeapon = value;
             }
         }
-        public Faction Faction
-        {
-            get
-            {
-                return this.faction;
-            }
-            set
-            {
-                this.faction = Faction;
-            }
-        }
-
-
+        
         public Warrior()
-            : this(170, 70)
+            : this(DEFAULT_HEIGHT, DEFAULT_WEIGHT)
         {
         }
 
         public Warrior(int height, int weight)
-            : this(height, weight, "Young Warrior", Faction.Default)
+            : this(height, weight, DEFAULT_NAME, Faction.Default)
         {
         }
 
@@ -90,46 +91,46 @@ namespace Characters.Warriors
 
             this.id = IdCounter;
             this.Height = height;
-            base.Weight = weight;
+            this.Weight = weight;
             this.Name = name;
-            base.Age = 18;
-            this.SwordWeapon = new Sword();
             this.Faction = faction;
+            this.Age = DEFAULT_AGE;
+            this.SwordWeapon = DEFAULT_SWORD_WEAPON;
 
-            if (this.faction == Faction.GoodGuy)
+            if (this.Faction == Faction.GoodGuy)
             {
-                base.HealthPoints = 120;
+                this.HealthPoints = 120;
             }
-            else if (this.faction == Faction.BadGuy)
+            else if (this.Faction == Faction.BadGuy)
             {
-                base.HealthPoints = 100;
+                this.HealthPoints = 100;
             }
         }
 
-        public Warrior(int healthPoints, int weight, int age)
+        public Warrior(int healthPoints, int weight, int age, int height)
             : base(healthPoints, weight, age)
         {
-
+            this.Height = height;
         }
-
-        public void SpecialWarriorGreeting()
-        {
-            base.Greetings(base.Name);
-        }
-
+        
         public static void GetDefaultValues(Warrior warrior)
         {
-            Console.WriteLine($"\nDefault Height: {DEFAULT_HEIGHT}" +
+            Console.WriteLine($"Default Height: {DEFAULT_HEIGHT}" +
                 $"\nDefault Weight: {DEFAULT_WEIGHT}" +
-                $"\nDefault Name: {DEFAULT_NAME}" +
+                $"\nDefualt Name: {DEFAULT_NAME}" +
                 $"\nDefault Age: {DEFAULT_AGE}" +
                 $"\nDefault Weapon Damage: {warrior.DEFAULT_SWORD_WEAPON.Damage}");
         }
 
-        public override void Move(int pauseBetweenMovements)
+        public override string Move(int pauseBetweenMovements)
         {
-            base.Move(pauseBetweenMovements);
-            Console.WriteLine("I just moved 10 times, I am a Warrior");
+            return string.Format("I just moved 10 times, I am a Warrior");
+            
+        }
+
+        public override int Addition(int firstNumber, int secondNumber)
+        {
+            return firstNumber + secondNumber;
         }
     }
 }

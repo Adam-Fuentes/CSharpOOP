@@ -1,44 +1,26 @@
-﻿using System;
+﻿using Interfaces;
+using System;
 using System.Threading;
 
 namespace Characters
 {
-    public class Character
+    public abstract class Character
     {
-        private int weight;
-        private int healthPoints;
         private string name;
+        protected int healthPoints;
+        protected int weight;
 
         protected int age;
 
-        public int Weight
+        public string Name
         {
             get
             {
-                return weight;
+                return this.name;
             }
             set
             {
-                weight = value;
-            }
-        }
-        public virtual int Age
-        {
-
-            get
-            {
-                return age;
-            }
-            set
-            {
-                if (value >= 18 && value <= 45)
-                {
-                    this.age = value;
-                }
-                else
-                {
-                    throw new ArgumentOutOfRangeException(string.Empty, "Please use age between 18 and 45.");
-                }
+                this.name = value;
             }
         }
         public int HealthPoints
@@ -52,15 +34,33 @@ namespace Characters
                 this.healthPoints = value;
             }
         }
-        public string Name
+        public int Weight
         {
             get
             {
-                return name;
+                return this.weight;
             }
             set
             {
-                name = value;
+                this.weight = value;
+            }
+        }
+        public virtual int Age
+        {
+            get
+            {
+                return this.age;
+            }
+            set
+            {
+                if (value >= 18 && value <= 45)
+                {
+                    this.age = value;
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException(string.Empty, "Please use age between 18 and 45");
+                }
             }
         }
 
@@ -76,18 +76,25 @@ namespace Characters
             this.Age = age;
         }
 
-        protected void Greetings(string name)
+        public void Greetings(string name)
         {
-            Console.WriteLine($@"{this.name} greets {name}");
+            Console.WriteLine($@"{this.Name} greets {name}!");
         }
-        
-        public virtual void Move(int pauseBetweenMovements)
+
+        public virtual string Move(int pauseBetweenMovements)
         {
             for (int i = 0; i < 10; i++)
             {
-                Console.WriteLine("I am moving!");
+                Console.WriteLine("I am moving");
                 Thread.Sleep(pauseBetweenMovements);
             }
+
+            return string.Empty;
+        }
+
+        public abstract int Addition(int firstNumber, int secondNumber)
+        {
+            return firstNumber + secondNumber;
         }
     }
 }
