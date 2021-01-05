@@ -70,10 +70,10 @@ namespace Characters.Spellcasters
             return "I just moved 10 times, I am a Mage";
         }
 
-        public void CastSpell(Warrior warrior)
+        public void CastSpell(Character character)
         {
-            warrior.HealthPoints -= this.mySpell.Damage;
-            this.mana -= this.mySpell.ManaCost;
+            character.HealthPoints = character.HealthPoints - this.mySpell.Damage;
+            this.mana = this.mana - this.mySpell.ManaCost;
         }
 
         public override int Addition(int firstNumber, int secondNumber)

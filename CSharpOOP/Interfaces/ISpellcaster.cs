@@ -9,6 +9,6 @@ namespace Interfaces
         Spell MySpell { get; set; }
         int Mana { get; set; }
 
-        void CastSpell(Warrior character);
+        void CastSpell(Character character);
     }
 }
